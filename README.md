@@ -11,15 +11,16 @@ To Illustrates how to perform time series analysis and decomposition on DailyDel
 5. Display the overall results.
 
 ### PROGRAM:
-## import pandas as pd\
+
+## import pandas as pd
 
 Load the dataset\
 data = pd.read_csv('DailyDelhiClimateTest.csv', parse_dates=['date'], index_col='date')\
 Inspect the first few rows\
 print(data.head())\
-import matplotlib.pyplot as plt\
+import matplotlib.pyplot as plt
 
-## Plot the temperature over time\
+## Plot the temperature over time
 plt.figure(figsize=(10, 6))\
 plt.plot(data['meantemp'], label='Mean Temperature')\
 plt.title('Daily Mean Temperature in Delhi')\
@@ -27,18 +28,18 @@ plt.xlabel('Date')\
 plt.ylabel('Temperature (°C)')\
 plt.legend()\
 plt.show()\
-from statsmodels.tsa.seasonal import seasonal_decompose\
+from statsmodels.tsa.seasonal import seasonal_decompose
 
-## Perform additive decomposition (can also try 'multiplicative' based on the nature of the data)\
-decomposition = seasonal_decompose(data['meantemp'], model='additive', period=365)\
+## Perform additive decomposition (can also try 'multiplicative' based on the nature of the data)
+decomposition = seasonal_decompose(data['meantemp'], model='additive', period=365)
 
-## Plot the decomposition\
+## Plot the decomposition
 decomposition.plot()\
 plt.show()\
 Calculate the 30-day moving average\
-data['mean_temp_30d_ma'] = data['meantemp'].rolling(window=30).mean()\
+data['mean_temp_30d_ma'] = data['meantemp'].rolling(window=30).mean()
 
-## Plot the moving average along with the original data\
+## Plot the moving average along with the original data
 plt.figure(figsize=(10, 6))\
 plt.plot(data['meantemp'], label='Mean Temperature')\
 plt.plot(data['mean_temp_30d_ma'], label='30-day Moving Average', color='red')\
@@ -46,7 +47,7 @@ plt.title('Mean Temperature with 30-Day Moving Average')\
 plt.xlabel('Date')\
 plt.ylabel('Temperature (°C)')\
 plt.legend()\
-plt.show()\
+plt.show()
 
 ### OUTPUT:
 ![Screenshot 2024-10-16 091515](https://github.com/user-attachments/assets/72973807-41b0-4225-8ff9-1d343d893cab)
