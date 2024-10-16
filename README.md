@@ -12,15 +12,12 @@ To Illustrates how to perform time series analysis and decomposition on DailyDel
 
 ### PROGRAM:
 
-## import pandas as pd
-
 Load the dataset\
 data = pd.read_csv('DailyDelhiClimateTest.csv', parse_dates=['date'], index_col='date')\
 Inspect the first few rows\
 print(data.head())\
 import matplotlib.pyplot as plt
 
-## Plot the temperature over time
 plt.figure(figsize=(10, 6))\
 plt.plot(data['meantemp'], label='Mean Temperature')\
 plt.title('Daily Mean Temperature in Delhi')\
@@ -30,16 +27,13 @@ plt.legend()\
 plt.show()\
 from statsmodels.tsa.seasonal import seasonal_decompose
 
-## Perform additive decomposition (can also try 'multiplicative' based on the nature of the data)
 decomposition = seasonal_decompose(data['meantemp'], model='additive', period=365)
 
-## Plot the decomposition
 decomposition.plot()\
 plt.show()\
 Calculate the 30-day moving average\
 data['mean_temp_30d_ma'] = data['meantemp'].rolling(window=30).mean()
 
-## Plot the moving average along with the original data
 plt.figure(figsize=(10, 6))\
 plt.plot(data['meantemp'], label='Mean Temperature')\
 plt.plot(data['mean_temp_30d_ma'], label='30-day Moving Average', color='red')\
